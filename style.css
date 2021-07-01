@@ -1,0 +1,55 @@
+*{
+padding: 0px;
+margin: 0px;
+}
+
+#container {
+    display: grid;
+    grid-template-columns: 25% 75%;
+    height: 100%;   
+
+}
+
+#left {
+    border-right: 1.5px solid black;
+    background-color: cornflowerblue;
+}
+
+#right {
+    border-left: 1.5px solid black;
+     background-color: cyan;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.houseContainer {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin: 10px;
+}
+
+.repairBar {
+    background-color: bisque;
+    width: 49.5px;
+    height: 25px;
+}
+
+.repairBarFinish {
+    background-color:black;
+    width: 0px;
+    height: 25px;
+}
+
+.houseContainerImage {
+    border: 0.5 black solid;
+    height: 49.5px;
+    width: 49.5px;
+    
+}
+
+.houseContainerButton {
+    border: 0.5 black solid;
+    height: 25px;
+    width: 50px;
+}
