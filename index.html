@@ -8,12 +8,17 @@
 </head>
 <body>
     <div id="container">
-        <div id="left"></div>
+        <div id="left">
+            <div>Currency: </div><span id="currencyNumber"></span>
+            <div>Income Per Second: <span id="ips"></span> </div>
+        </div>
         <div id="right">
             <div class="houseContainer" id="houseOne">
                 <img src="images/houseIcon.jpg" class="houseContainerImage" alt="">
                 <div class="repairBar" id="h1rb">
-                    <div class="repairBarFinish" id="h1rbf"></div>
+                    <div class="repairBarFinish" id="h1rbf">
+                        <div class="repairBarFinish2" id="h1rbf2"></div>
+                    </div>
                 </div>
                 <button class="houseContainerButton" onclick="repair(house1)">Repair </button>
                 <button class="houseContainerButton" onclick="rent()">Rent </button>
@@ -24,7 +29,7 @@
                 <div class="repairBar">
                     <div class="repairBarFinish"></div>
                 </div>
-                <button class="houseContainerButton" onclick="repair()">Repair </button>
+                <button class="houseContainerButton" onclick="repair(house1)">Repair </button>
                 <button class="houseContainerButton" onclick="rent()">Rent </button>
                 <button class="houseContainerButton" onclick="sell()">Sell </button>
             </div>

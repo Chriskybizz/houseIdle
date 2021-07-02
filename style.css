@@ -13,6 +13,8 @@ margin: 0px;
 #left {
     border-right: 1.5px solid black;
     background-color: cornflowerblue;
+    display: flex;
+    flex-direction:column;
 }
 
 #right {
@@ -37,6 +39,12 @@ margin: 0px;
 
 .repairBarFinish {
     background-color:black;
+    width: 0px;
+    height: 25px;
+}
+
+.repairBarFinish2 {
+    background-color:green;
     width: 0px;
     height: 25px;
 }
