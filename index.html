@@ -1,4 +1,5 @@
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -6,11 +7,27 @@
     <link rel="stylesheet" href="style.css">
     <title>Document</title>
 </head>
+
 <body>
     <div id="container">
         <div id="left">
-            <div>Currency: </div><span id="currencyNumber"></span>
-            <div>Income Per Second: <span id="ips"></span> </div>
+            <div id="stats">
+                <div>Currency: </div><span id="currencyNumber"></span>
+                <div>Income Per Second: <span id="ips"></span> </div>
+            </div>
+            <div id="upgrades">
+                <div class="upgradeContainer" id="uc1">
+                    <button class="upgradeButton" id="ub1" onclick="upgrade('u1Cost','uc1', 50, 0.1,'')">Sturdy
+                        Gloves</button>
+                    <div class="upgradeInfo" id="ui1">A sturdy pair of gloves will help the repairs. Repair Power +
+                        0.1<span id="u1Cost"></span> </div>
+                </div>
+                <div class="upgradeContainer" id="uc2">
+                    <button class="upgradeButton" id="ub2" onclick="upgrade('u2Cost','uc2',100,'',0.1)">Trowel</button>
+                    <div class="upgradeInfo" id="ui2">Time is money, and this trowel will save you time. Repair Cost -
+                        0.1<span id="u2Cost"></span> </div>
+                </div>
+            </div>
         </div>
         <div id="right">
             <div class="houseContainer" id="houseOne">
@@ -20,61 +37,18 @@
                         <div class="repairBarFinish2" id="h1rbf2"></div>
                     </div>
                 </div>
-                <button class="houseContainerButton" onclick="repair(house1)">Repair </button>
+                <button class="houseContainerButton" onclick="repair(house1, 'h1rbf', 'h1rbf2')">Repair </button>
                 <button class="houseContainerButton" onclick="rent()">Rent </button>
                 <button class="houseContainerButton" onclick="sell()">Sell </button>
             </div>
-            <div class="houseContainer">
+            <div class="houseContainer" id="houseTwo">
                 <img src="images/houseIcon.jpg" class="houseContainerImage" alt="">
-                <div class="repairBar">
-                    <div class="repairBarFinish"></div>
+                <div class="repairBar" id="h2rb">
+                    <div class="repairBarFinish" id='h2rbf'>
+                        <div class="repairBarFinish2" id='h2rbf2'></div>
+                    </div>
                 </div>
-                <button class="houseContainerButton" onclick="repair(house1)">Repair </button>
-                <button class="houseContainerButton" onclick="rent()">Rent </button>
-                <button class="houseContainerButton" onclick="sell()">Sell </button>
-            </div>
-            <div class="houseContainer">
-                <img src="images/houseIcon.jpg" class="houseContainerImage" alt="">
-                <div class="repairBar">
-                    <div class="repairBarFinish"></div>
-                </div>
-                <button class="houseContainerButton" onclick="repair()">Repair </button>
-                <button class="houseContainerButton" onclick="rent()">Rent </button>
-                <button class="houseContainerButton" onclick="sell()">Sell </button>
-            </div>
-            <div class="houseContainer">
-                <img src="images/houseIcon.jpg" class="houseContainerImage" alt="">
-                <div class="repairBar">
-                    <div class="repairBarFinish"></div>
-                </div>
-                <button class="houseContainerButton" onclick="repair()">Repair </button>
-                <button class="houseContainerButton" onclick="rent()">Rent </button>
-                <button class="houseContainerButton" onclick="sell()">Sell </button>
-            </div>
-            <div class="houseContainer">
-                <img src="images/houseIcon.jpg" class="houseContainerImage" alt="">
-                <div class="repairBar">
-                    <div class="repairBarFinish"></div>
-                </div>
-                <button class="houseContainerButton" onclick="repair()">Repair </button>
-                <button class="houseContainerButton" onclick="rent()">Rent </button>
-                <button class="houseContainerButton" onclick="sell()">Sell </button>
-            </div>
-            <div class="houseContainer">
-                <img src="images/houseIcon.jpg" class="houseContainerImage" alt="">
-                <div class="repairBar">
-                    <div class="repairBarFinish"></div>
-                </div>
-                <button class="houseContainerButton" onclick="repair()">Repair </button>
-                <button class="houseContainerButton" onclick="rent()">Rent </button>
-                <button class="houseContainerButton" onclick="sell()">Sell </button>
-            </div>
-            <div class="houseContainer">
-                <img src="images/houseIcon.jpg" class="houseContainerImage" alt="">
-                <div class="repairBar">
-                    <div class="repairBarFinish"></div>
-                </div>
-                <button class="houseContainerButton" onclick="repair()">Repair </button>
+                <button class="houseContainerButton" onclick="repair(house2,'h2rbf','h2rbf2')">Repair </button>
                 <button class="houseContainerButton" onclick="rent()">Rent </button>
                 <button class="houseContainerButton" onclick="sell()">Sell </button>
             </div>
@@ -82,6 +56,7 @@
     </div>
 
     <script src="script.js"></script>
-    
+
 </body>
+
 </html>

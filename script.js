@@ -1,6 +1,6 @@
 const config = {
     barWidth: 49.5,
-    repairPower: 1,
+    repairPower: 0.1,
     currency: 0,
     repairCost: 1,
     ips: 0
@@ -21,27 +21,30 @@ const house = function (hhp, chhp, nextHp, active1, act1Val, active2, act2Val, a
 
 }
 
-const house1 = new house(20, 0, 70, true, 0.3, false, 0.6, false, 1);
 
-const repair = (val) => {
+const house1 = new house(100, 0, 700, true, 0.3, false, 0.6, false, 1);
+const house2 = new house(500, 0, 1200, true, 1, false, 2, false, 5);
+
+const repair = (val, elId, elId2) => {
     numberDivide = val.houseRepairedValue / config.barWidth;
     numberDivide2 = val.houseSecValue / config.barWidth;
-    if (config.currency  >= config.repairCost) {
+    if (config.currency >= config.repairCost) {
         config.currency = config.currency - config.repairCost;
         document.getElementById("currencyNumber").innerHTML = Math.floor(config.currency);
 
 
         if (val.currentHouseHp < val.houseRepairedValue) {
             val.currentHouseHp = val.currentHouseHp + config.repairPower;
-            document.getElementById("h1rbf").style.width = val.currentHouseHp / numberDivide + "px";
+            document.getElementById(elId).style.width = val.currentHouseHp / numberDivide + "px";
+            console.log(val.active2)
         }
-        else if (val.currentHouseHp >= val.houseRepairedValue) {
-
+        else if (val.currentHouseHp > val.active2Val) {
+            val.active2 = true;
+            console.log("act val 2 time")
             if (val.currentHouseHp < val.houseSecValue) {
-                val.active2 = true;
                 val.currentHouseHp = val.currentHouseHp + config.repairPower;
-                document.getElementById("h1rbf2").style.width = val.currentHouseHp / numberDivide2 + "px";
-                console.log("Active 2 true")
+                document.getElementById(elId2).style.width = val.currentHouseHp / numberDivide2 + "px";
+
             }
 
         }
@@ -49,22 +52,22 @@ const repair = (val) => {
 }
 
 const valueCheck = (houseToCheck) => {
-    if (houseToCheck.active1 = true) {
+    if (houseToCheck.active1 === true) {
         config.currency = config.currency + houseToCheck.active1Val;
         document.getElementById("currencyNumber").innerHTML = Math.floor(config.currency);
         config.ips = houseToCheck.active1Val;
-        document.getElementById("ips").innerHTML = config.ips;
+        document.getElementById("ips").innerHTML = houseToCheck.active1Val;
     }
-    if (houseToCheck.active2 = true) {
+    if (houseToCheck.active2 === true) {
         config.currency = config.currency + houseToCheck.active2Val;
         document.getElementById("currencyNumber").innerHTML = Math.floor(config.currency);
         config.ips = houseToCheck.active2Val;
         document.getElementById("ips").innerHTML = config.ips;
-    console.log(true)
+
     }
 
-    if(houseToCheck.currentHouseHp === houseToCheck.houseSecValue){
-        console.log(true);
+    if (houseToCheck.currentHouseHp === houseToCheck.houseSecValue) {
+        houseToCheck.active3 = true;
         config.currency = config.currency + houseToCheck.active3Val;
         document.getElementById("currencyNumber").innerHTML = Math.floor(config.currency);
         config.ips = houseToCheck.active3Val;
@@ -73,7 +76,52 @@ const valueCheck = (houseToCheck) => {
 
 }
 
+const houseShow = () => {
+    if (config.currency >= 100) {
+        document.getElementById("houseTwo").style.display = "flex";
+    }
+
+}
+
+
+const upgrade = (upgradeCostSpan, upgradeId, cost, rp, rc) => {
+    if (cost <= config.currency) {
+        config.currency = config.currency - cost;
+        document.getElementById("currencyNumber").innerHTML = config.currency;
+        document.getElementById(upgradeCostSpan).innerHTML = cost;
+
+
+
+        if (rp !== "" && rc === "") {
+            config.repairPower = config.repairPower + rp;
+            console.log(config.repairPower)
+        }
+        if (rp === "" && rc !== "") {
+            config.repairCost = config.repairCost - rc;
+            console.log(config.repairCost)
+
+        }
+        document.getElementById(upgradeId).style.display = "none";
+
+    }
+
+}
+
+const upgradeShow = (upVal, upName) => {
+    if (config.currency > upVal) {
+        document.getElementById(upName).style.display = "flex";
+    }
+}
+
+
+
 window.setInterval(function () {
-valueCheck(house1);
+    valueCheck(house1);
+    valueCheck(house2);
+    houseShow();
+    upgradeShow(10, "uc1")
+    upgradeShow(30, "uc2")
+
+
 
 }, 1000)
