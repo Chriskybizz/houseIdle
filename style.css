@@ -1,6 +1,7 @@
 * {
     padding: 0px;
     margin: 0px;
+    font-size: 11px;
 }
 
 #container {
@@ -58,6 +59,10 @@
     border: 0.5 black solid;
     height: 25px;
     width: 50px;
+}
+
+#houseOne {
+   /* display: none; */
 }
 
 #houseTwo {

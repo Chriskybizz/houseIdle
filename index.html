@@ -30,26 +30,27 @@
             </div>
         </div>
         <div id="right">
+
+            <!-- Houses to follow -->
             <div class="houseContainer" id="houseOne">
                 <img src="images/houseIcon.jpg" class="houseContainerImage" alt="">
-                <div class="repairBar" id="h1rb">
-                    <div class="repairBarFinish" id="h1rbf">
-                        <div class="repairBarFinish2" id="h1rbf2"></div>
-                    </div>
+                <div class="repairBar">
+                    <div class="repairBarFinish2" id="repairBarOneFinish"></div>
                 </div>
-                <button class="houseContainerButton" onclick="repair(house1, 'h1rbf', 'h1rbf2')">Repair </button>
-                <button class="houseContainerButton" onclick="rent()">Rent </button>
+                <button class="houseContainerButton" onclick="purchase()">Purchase</button>
+                <button class="houseContainerButton" onclick="repair(0, 'repairBarOneFinish')">Repair </button>
+                <!-- array selector, this houscontainers inside repair bar-->
                 <button class="houseContainerButton" onclick="sell()">Sell </button>
             </div>
+
             <div class="houseContainer" id="houseTwo">
                 <img src="images/houseIcon.jpg" class="houseContainerImage" alt="">
-                <div class="repairBar" id="h2rb">
-                    <div class="repairBarFinish" id='h2rbf'>
-                        <div class="repairBarFinish2" id='h2rbf2'></div>
-                    </div>
+                <div class="repairBar">
+                    <div class="repairBarFinish2" id="repairBarTwoFinish"></div>
                 </div>
-                <button class="houseContainerButton" onclick="repair(house2,'h2rbf','h2rbf2')">Repair </button>
-                <button class="houseContainerButton" onclick="rent()">Rent </button>
+                <button class="houseContainerButton" onclick="purchase()">Purchase</button>
+                <button class="houseContainerButton" onclick="repair(1, 'repairBarTwoFinish')">Repair </button>
+                <!-- array selector, this houscontainers inside repair bar-->
                 <button class="houseContainerButton" onclick="sell()">Sell </button>
             </div>
         </div>
