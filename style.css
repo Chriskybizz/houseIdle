@@ -62,7 +62,7 @@
 }
 
 #houseOne {
-   /* display: none; */
+    display: none;
 }
 
 #houseTwo {
@@ -79,18 +79,6 @@
     background-color: blueviolet;
 }
 
-.upgradeContainer {
-    display: none;
-}
-
-.upgradeInfo {
-    display: none;
-}
-
-#ub1:hover+#ui1 {
-    display: flex;
-}
-
-#ub2:hover+#ui2 {
+#sturdyGloves{
     display: flex;
 }
