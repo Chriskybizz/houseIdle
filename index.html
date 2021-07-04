@@ -5,6 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Otomanopee+One&family=Yomogi&display=swap" rel="stylesheet">
     <title>Document</title>
 </head>
 
@@ -12,24 +16,28 @@
     <div id="container">
         <div id="left">
             <div id="stats">
-                <div>Currency: </div><span id="currencyNumber"></span>
-                <div>Work power: <span id="workPowerId"></span></div>
-                <div>Repair Power: <span id="repairPowerId"></span></div>
-                <div>Repair Cost: <span id="repairCostId"></span></div>
-                <button onclick="clicker()">Do odd jobs +1</button>
+                <div class="statDress">Currency: <span id="currencyNumber"></span></div>
+                <div class="statDress">Work power: <span id="workPowerId"></span></div>
+                <div class="statDress">Repair Power: <span id="repairPowerId"></span></div>
+                <div class="statDress">Repair Cost: <span id="repairCostId"></span></div>
+                <div></div>
+                <div id="jobButtonContainer"><button id="jobButton" onclick="clicker()">Do odd jobs</button>
+                </div>
             </div>
             <div id="upgrades">
-                <button id="softGloves" onclick="upgraderWP(0)">soft gloves</button>
-                <button id="thickGloves" onclick="upgraderWP(1)">thick gloves</button>
-                <button id="sturdyGloves" onclick="upgraderWP(2)">sturdy gloves</button>
-                <button id="aTrowel" onclick="upgrader(1, config.repairCost)">A trowel</button>
+                <button id="softGloves" class="upgradeButton" onclick="upgraderWP(0)">soft gloves</button>
+                <div id="upInfo0"><span id="test"></span> </div>
+                <button id="thickGloves" class="upgradeButton" onclick="upgraderWP(1)">thick gloves</button>
+                <div id="upInfo1"></div>
+                <button id="sturdyGloves" class="upgradeButton" onclick="upgraderWP(2)">sturdy gloves</button>
+                <div id="upInfo2"></div>
             </div>
         </div>
         <div id="right">
 
             <!-- Houses to follow -->
             <div class="houseContainer" id="houseOne">
-                <img src="images/houseIcon.jpg" class="houseContainerImage" alt="">
+                <img src="images/houseIcon.png" class="houseContainerImage" alt="">
                 <div class="repairBar">
                     <div class="repairBarFinish2" id="repairBarOneFinish"></div>
                 </div>
