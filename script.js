@@ -10,8 +10,19 @@ const config = {
 
 
 class house {
-    constructor(houseId, houseCost, purchased, stageOneHp, stageTwoHp, stageThreeHp, currentHouseHp, stageOneValue, stageTwoValue, stageThreeValue, houseBio) {
-
+    constructor(
+        houseId,
+        houseCost,
+        purchased,
+        stageOneHp,
+        stageTwoHp,
+        stageThreeHp,
+        currentHouseHp,
+        stageOneValue,
+        stageTwoValue,
+        stageThreeValue,
+        houseBio
+    ) {
         this.houseId = houseId;
         this.houseCost = houseCost;
         this.purchased = purchased;
