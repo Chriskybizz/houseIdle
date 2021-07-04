@@ -79,6 +79,29 @@
     background-color: blueviolet;
 }
 
-#sturdyGloves{
-    display: flex;
+#softGloves {
+    display: none;
+}
+
+#thickGloves {
+    display: none;
+}
+
+#sturdyGloves {
+    display: none;
+}
+
+#aTrowel {
+    display: none;
+}
+
+.houseDescription1 {
+    display: none;
+    position: inherit;
+    color: white;
+    background: black;    
+}
+
+#houseOne:hover + .houseDescription1 {
+    display: inline-flexbox;
 }

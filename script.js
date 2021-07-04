@@ -1,22 +1,13 @@
 const config = {
     barWidth: 49.5,
     repairPower: 0.3,
-    currency: 100,
-    repairCost: 1,
+    currency: 0,
+    repairCost: 5,
     workPower: 0.3,
 
 }
-console.log(config[4])
 
-const upgrader = (upgradeId,cost, valToUpgrade, upgradeBy) => {
-    if (config.currency >= cost) {
-        config.currency -= cost;
-        config[valToUpgrade] += upgradeBy;
-        document.getElementById("currencyNumber").innerHTML = config.currency;
-        document.getElementById(upgradeId).style.display = "none";
-        console.log(config.valToUpgrade)
-    }
-}
+
 
 class house {
     constructor(houseId, houseCost, purchased, stageOneHp, stageTwoHp, stageThreeHp, currentHouseHp, stageOneValue, stageTwoValue, stageThreeValue, houseBio) {
@@ -32,14 +23,48 @@ class house {
         this.stageTwoValue = stageTwoValue;
         this.stageThreeValue = stageThreeValue;
         this.houseBio = houseBio;
+    }
+}
 
-
+class upgrade {
+    constructor(cycler, id, cost, purchased, effect, bio) {
+        this.cycler = cycler;
+        this.id = id;
+        this.cost = cost;
+        this.purchased = purchased;
+        this.effect = effect;
+        this.bio = bio;
     }
 }
 
 const houseArray = [
-    house1 = new house("houseOne", 100, false, 100, 500, 1000, 0, 0.3, 0.7, 1.5, "A small cardboard box to protect against the elements"),
-    house2 = new house("houseTwo", 1000, false, 500, 800, 1200, 0, 1.2, 2.5, 5, "A shack, four wooden walls and and a roof. Perfect for hipsters")]
+    house1 = new house("houseOne", 100, false, 20, 50, 100, 0, 0.3, 0.7, 1.5, "A small cardboard box to protect against the elements"),
+    house2 = new house("houseTwo", 1000, false, 500, 800, 1200, 0, 1.2, 2.5, 5, "A shack, four wooden walls and and a roof. Perfect for hipsters")];
+
+
+const upgradeArray = [
+    softGloves = new upgrade(0, "softGloves", 5, false, 0.1, "A pair of thin, fabric gloves"),
+    thickGloves = new upgrade(1, "thickGloves", 10, false, 0.2, "A thicker set of gloves"),
+    sturdyGloves = new upgrade(2, "sturdyGloves", 20, false, 0.5, "A sturdy pair of gloves to help with masonary work"),
+    aTrowel = new upgrade(3, "aTrowel", 105, false, -0.1, "Time is money, and this will save you time"),
+]
+
+const houseList = (houseCycle, houseElId) => {
+    const HouseInfo = `Description: ${houseArray[houseCycle].houseBio}
+                       Income Generated when purchased: ${houseArray[houseCycle].houseBio} `
+    document.getElementById(houseElId).innerHTML = HouseInfo;
+}
+
+//refreshing values
+
+const whenTheUpgradeShows = (arr) => {
+    for (j = 0; j < arr.length; j++) {
+        if (config.currency >= arr[j].cost && arr[j].purchased === false) {
+            document.getElementById(arr[j].id).style.display = "flex";
+        }
+    }
+
+}
 
 const whenTheHouseShows = (arr) => {
     for (i = 0; i < arr.length; i++) {
@@ -51,10 +76,15 @@ const whenTheHouseShows = (arr) => {
     }
 }
 
-
 const refreshValues = () => {
     let currencyTwoDP = config.currency.toFixed(2);
+    let repairCostTwoDP = config.repairCost.toFixed(2);
+    let workPowerTwoDP = config.workPower.toFixed(2);
+    let repairPowerTwoDP = config.repairPower.toFixed(2);
     document.getElementById("currencyNumber").innerHTML = currencyTwoDP;
+    document.getElementById("repairCostId").innerHTML = repairCostTwoDP;
+    document.getElementById("repairPowerId").innerHTML = repairPowerTwoDP;
+    document.getElementById("workPowerId").innerHTML = workPowerTwoDP;
 }
 
 const incomeFromHouse = (arr) => {
@@ -72,6 +102,8 @@ const incomeFromHouse = (arr) => {
 
     }
 }
+
+//onclicks
 
 const clicker = () => {
     config.currency += config.workPower;
@@ -114,10 +146,52 @@ const repair = (houseToRepair, finishBar) => {
     }
 }
 
+//upgrades
+
+const upgraderWP = (cycler) => {
+    if (config.currency >= upgradeArray[cycler].cost) {
+        config.currency -= upgradeArray[cycler].cost;
+        document.getElementById("currencyNumber").innerHTML = config.currency;
+        upgradeArray[cycler].purchased = true;
+        config.workPower += upgradeArray[cycler].effect;
+        document.getElementById("workPowerId").innerHTML = config.workPower
+        document.getElementById(upgradeArray[cycler].id).style.display = "none";
+
+    }
+}
+
+const upgraderRP = (cycler) => {
+    if (config.currency >= upgradeArray[cycler].cost) {
+        config.currency -= upgradeArray[cycler].cost;
+        document.getElementById("currencyNumber").innerHTML = config.currency;
+        upgradeArray[cycler].purchased = true;
+        config.repairPower += upgradeArray[cycler].effect;
+        document.getElementById("repairPowerId").innerHTML = config.workPower
+        document.getElementById(upgradeArray[cycler].id).style.display = "none";
+
+    }
+}
+
+const upgraderRC = (cycler) => {
+    if (config.currency >= upgradeArray[cycler].cost) {
+        config.currency -= upgradeArray[cycler].cost;
+        document.getElementById("currencyNumber").innerHTML = config.currency;
+        upgradeArray[cycler].purchased = true;
+        config.repairCost += upgradeArray[cycler].effect;
+        document.getElementById("repairCostId").innerHTML = config.workPower
+        document.getElementById(upgradeArray[cycler].id).style.display = "none";
+
+    }
+}
+
+
+
+
 window.setInterval(function () {
     refreshValues();
     incomeFromHouse(houseArray);
     whenTheHouseShows(houseArray);
+    whenTheUpgradeShows(upgradeArray);
 
 
 }, 1000)

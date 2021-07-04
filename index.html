@@ -13,11 +13,16 @@
         <div id="left">
             <div id="stats">
                 <div>Currency: </div><span id="currencyNumber"></span>
-                <div>Income Per Second: <span id="ips"></span> </div>
+                <div>Work power: <span id="workPowerId"></span></div>
+                <div>Repair Power: <span id="repairPowerId"></span></div>
+                <div>Repair Cost: <span id="repairCostId"></span></div>
                 <button onclick="clicker()">Do odd jobs +1</button>
             </div>
             <div id="upgrades">
-                <button id="sturdyGloves" onclick="upgrader('sturdyGloves', 50, 4, 0.2)">sturdyGloves</button>
+                <button id="softGloves" onclick="upgraderWP(0)">soft gloves</button>
+                <button id="thickGloves" onclick="upgraderWP(1)">thick gloves</button>
+                <button id="sturdyGloves" onclick="upgraderWP(2)">sturdy gloves</button>
+                <button id="aTrowel" onclick="upgrader(1, config.repairCost)">A trowel</button>
             </div>
         </div>
         <div id="right">
@@ -28,6 +33,7 @@
                 <div class="repairBar">
                     <div class="repairBarFinish2" id="repairBarOneFinish"></div>
                 </div>
+                <div class="houseDescription1"><span id="houseInfo1">test</span></div>
                 <button class="houseContainerButton" id="pButton1" onclick="purchase(0,'pButton1')">Purchase</button>
                 <button class="houseContainerButton" onclick="repair(0, 'repairBarOneFinish')">Repair </button>
                 <!-- array selector, this houscontainers inside repair bar-->
