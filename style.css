@@ -94,14 +94,3 @@
 #aTrowel {
     display: none;
 }
-
-.houseDescription1 {
-    display: none;
-    position: inherit;
-    color: white;
-    background: black;    
-}
-
-#houseOne:hover + .houseDescription1 {
-    display: inline-flexbox;
-}

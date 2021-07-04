@@ -49,11 +49,11 @@ const upgradeArray = [
     aTrowel = new upgrade(3, "aTrowel", 105, false, -0.1, "Time is money, and this will save you time"),
 ]
 
-const houseList = (houseCycle, houseElId) => {
+/*const houseList = (houseCycle, houseElId) => {
     const HouseInfo = `Description: ${houseArray[houseCycle].houseBio}
                        Income Generated when purchased: ${houseArray[houseCycle].houseBio} `
-    document.getElementById(houseElId).innerHTML = HouseInfo;
-}
+    document.getElementById(houseElId).innerHTML = HouseInfo; 
+} */
 
 //refreshing values
 
@@ -192,6 +192,7 @@ window.setInterval(function () {
     incomeFromHouse(houseArray);
     whenTheHouseShows(houseArray);
     whenTheUpgradeShows(upgradeArray);
+    // houseList(0,"houseInfo1")
 
 
 }, 1000)
