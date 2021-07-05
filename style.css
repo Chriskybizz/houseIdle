@@ -73,19 +73,49 @@
     font-family  : 'Yomogi', cursive;
 }
 
-
-
-#upInfo0 {
+.upInfo {
     width     : 75px;
     background: black;
     color     : cornflowerblue;
     margin-top: 15px;
     position  : absolute;
     display   : none;
-    z-index   : 2;
+    z-index   : 3;
 }
 
-#softGloves:hover+#upInfo0 {
+#softGloves:hover+.upInfo {
+    display: flex;
+}
+
+#thickGloves:hover+.upInfo {
+    display: flex;
+}
+
+#sturdyGloves:hover+.upInfo {
+    display: flex;
+}
+
+#softBoots:hover+.upInfo {
+    display: flex;
+}
+
+#thickBoots:hover+.upInfo {
+    display: flex;
+}
+
+#sturdyBoots:hover+.upInfo {
+    display: flex;
+}
+
+#softWristSupport:hover+.upInfo {
+    display: flex;
+}
+
+#thickWristSupport:hover+.upInfo {
+    display: flex;
+}
+
+#sturdyWristSupport:hover+.upInfo {
     display: flex;
 }
 
@@ -154,6 +184,26 @@
     display: none;
 }
 
-#aTrowel {
+#softBoots {
+    display: none;
+}
+
+#thickBoots {
+    display: none;
+}
+
+#sturdyBoots {
+    display: none;
+}
+
+#softWristSupport {
+    display: none;
+}
+
+#thickWristSupport {
+    display: none;
+}
+
+#sturdyWristSupport {
     display: none;
 }

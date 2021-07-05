@@ -54,15 +54,22 @@ const houseArray = [
 
 
 const upgradeArray = [
+
     softGloves = new upgrade(0, "softGloves", 5, false, 0.1, "A pair of thin, fabric gloves"),
     thickGloves = new upgrade(1, "thickGloves", 10, false, 0.2, "A thicker set of gloves"),
-    sturdyGloves = new upgrade(2, "sturdyGloves", 20, false, 0.5, "A sturdy pair of gloves to help with masonary work"),
-    aTrowel = new upgrade(3, "aTrowel", 105, false, -0.1, "Time is money, and this will save you time"),
+    sturdyGloves = new upgrade(2, "sturdyGloves", 20, false, 0.5, "A sturdy pair of gloves"),
+    softBoots = new upgrade(3, "softBoots", 50, false, 1, "Basically Socks"),
+    thickBoots = new upgrade(4, "thickBoots", 90, false, 2, "Better Boots"),
+    sturdyBoots = new upgrade(5, "sturdyBoots", 150, false, 4, "Regulation work boots"),
+    softWristSupport = new upgrade(6, "softWristSupport", 300, false, 9, "bandages"),
+    thickWristSupport = new upgrade(7, "thickWristSupport", 700, false, 15, "Thicker wrist support"),
+    sturdyWristSupport = new upgrade(8, "sturdyWristSupport", 1600, false, 25, "Proper wrist support"),
+
 ]
 
-const upgradeInfo = (cycler) => {
-    const infoText = "cost: " + upgradeArray[cycler].cost + "\n" + "Description: " + upgradeArray[cycler].bio;
-    document.getElementById("test").innerHTML = infoText;
+const upgradeInfo = (cycler, id) => {
+    const infoText = `cost: ${upgradeArray[cycler].cost}, \n Description: ${upgradeArray[cycler].bio}, \n Job Income +: ${upgradeArray[cycler].effect}`
+    document.getElementById(id).innerHTML = infoText;
     console.log(infoText)
 }
 
@@ -209,7 +216,15 @@ window.setInterval(function () {
     incomeFromHouse(houseArray);
     whenTheHouseShows(houseArray);
     whenTheUpgradeShows(upgradeArray);
-    upgradeInfo(0);
+    upgradeInfo(0, "test1");
+    upgradeInfo(1, "test2");
+    upgradeInfo(2, "test3");
+    upgradeInfo(3, "test4");
+    upgradeInfo(4, "test5");
+    upgradeInfo(5, "test6");
+    upgradeInfo(6, "test7");
+    upgradeInfo(7, "test8");
+    upgradeInfo(8, "test9");
 
 
 }, 1000)
