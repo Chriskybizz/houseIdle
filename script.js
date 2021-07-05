@@ -64,6 +64,15 @@ const upgradeArray = [
     softWristSupport = new upgrade(6, "softWristSupport", 300, false, 9, "bandages"),
     thickWristSupport = new upgrade(7, "thickWristSupport", 700, false, 15, "Thicker wrist support"),
     sturdyWristSupport = new upgrade(8, "sturdyWristSupport", 1600, false, 25, "Proper wrist support"),
+    aTrowel = new upgrade(9, "aTrowel", 150, false, 0.1, "A trowel for cement"),
+    aHammer = new upgrade(10, "aHammer", 300, false, 0.2, "A hammer to save time"),
+    aDrill = new upgrade(11, "aDrill", 500, false, 0.5, "A drill"),
+    spiritLevel= new upgrade(12, "spiritLevel", 50, false, 1, "Keep it level"),
+    elbowGrease = new upgrade(13, "elbowGrease", 90, false, 2, "EG40"),
+    aPick = new upgrade(14, "aPick", 150, false, 4, "For breaking rocks"),
+    jackHammer = new upgrade(15, "jackHammer", 300, false, 9, "Smashing rocks"),
+    cementMixer = new upgrade(16, "cementMixer", 700, false, 15, "Mixing cement, saving time"),
+    powerDrill = new upgrade(17, "powerDrill", 1600, false, 25, "The daddy drill"),
 
 ]
 
@@ -225,6 +234,15 @@ window.setInterval(function () {
     upgradeInfo(6, "test7");
     upgradeInfo(7, "test8");
     upgradeInfo(8, "test9");
+    upgradeInfo(9, "test10");
+    upgradeInfo(10, "test11");
+    upgradeInfo(11, "test12");
+    upgradeInfo(12, "test13");
+    upgradeInfo(13, "test14");
+    upgradeInfo(14, "test15");
+    upgradeInfo(15, "test16");
+    upgradeInfo(16, "test17");
+    upgradeInfo(17, "test18");
 
 
 }, 1000)

@@ -119,6 +119,41 @@
     display: flex;
 }
 
+#aTrowel:hover + .upInfo {
+    display: flex;
+}
+
+#aHammer:hover + .upInfo{
+    display: flex;
+}
+
+#aDrill:hover + .upInfo{
+    display: flex;
+}
+
+#spiritLevel:hover + .upInfo{
+    display: flex;
+}
+
+#elbowGrease:hover + .upInfo{
+    display: flex;
+}
+
+#aPick:hover + .upInfo{
+    display: flex;
+}
+
+#jackHammer:hover + .upInfo{
+    display: flex;
+}
+
+#cementMixer:hover + .upInfo{
+    display: flex;
+}
+
+#powerDrill:hover + .upInfo{
+    display: flex;
+}
 
 #right {
     border-left     : 1.5px solid black;
@@ -205,5 +240,41 @@
 }
 
 #sturdyWristSupport {
+    display: none;
+}
+
+#aTrowel {
+    display: none;
+}
+
+#aHammer{
+    display: none;
+}
+
+#aDrill{
+    display: none;
+}
+
+#spiritLevel{
+    display: none;
+}
+
+#elbowGrease{
+    display: none;
+}
+
+#aPick{
+    display: none;
+}
+
+#jackHammer{
+    display: none;
+}
+
+#cementMixer{
+    display: none;
+}
+
+#powerDrill{
     display: none;
 }
