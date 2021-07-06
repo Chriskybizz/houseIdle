@@ -1,54 +1,15 @@
-const config = {
-    barWidth: 49.5,
-    repairPower: 0.3,
-    currency: 0,
-    repairCost: 5,
-    workPower: 0.3,
-}
+import { Game } from "./classes/game";
+import { House } from "./classes/house";
+import { config, houseArray } from "./config";
 
-class Game {
-    constructor(
-        barWidth,
-        repairPower,
-        currency,
-        repairCost,
-        workPower,
-    ) {
-        this.barWidth = barWidth ? barWidth : 49.5;
-        this.repairPower = repairPower ? repairPower : 0.3;
-        this.currency = currency ? currency : 0;
-        this.repairCost = repairCost ? repairCost : 5;
-        this.workPower = workPower ? workPower : 0.3;
-        this.houses = []; // map returned house(class) objects
-    }
-}
-class house {
-    constructor(
-        houseId,
-        houseCost,
-        purchased,
-        stageOneHp,
-        stageTwoHp,
-        stageThreeHp,
-        currentHouseHp,
-        stageOneValue,
-        stageTwoValue,
-        stageThreeValue,
-        houseBio
-    ) {
-        this.houseId = houseId;
-        this.houseCost = houseCost;
-        this.purchased = purchased;
-        this.stageOneHp = stageOneHp;
-        this.stageTwoHp = stageTwoHp;
-        this.stageThreeHp = stageThreeHp;
-        this.currentHouseHp = currentHouseHp;
-        this.stageOneValue = stageOneValue;
-        this.stageTwoValue = stageTwoValue;
-        this.stageThreeValue = stageThreeValue;
-        this.houseBio = houseBio;
-    }
-}
+const game = new Game(
+    config.barWidth,
+    config.repairPower,
+    config.currency,
+    config.repairCost,
+    config.workPower,
+    houseArray,
+)
 class upgrade {
     constructor(cycler, id, cost, purchased, effect, bio) {
         this.cycler = cycler;
@@ -60,38 +21,11 @@ class upgrade {
     }
 }
 
-const houseArray = [
-    house1 = new house(
-        "houseOne",
-        100,
-        false,
-        20,
-        50,
-        100,
-        0,
-        0.3,
-        0.7,
-        1.5,
-        "A small cardboard box to protect against the elements"
-    ),
-    house2 = new house(
-        "houseTwo",
-        1000,
-        false,
-        500,
-        800,
-        1200,
-        0,
-        1.2,
-        2.5,
-        5,
-        "A shack, four wooden walls and and a roof. Perfect for hipsters"
-    ),
-];
+
 
 
 const upgradeArray = [
-
+    // Convert to map of upgradeConfigArray
     softGloves = new upgrade(0, "softGloves", 5, false, 0.1, "A pair of thin, fabric gloves"),
     thickGloves = new upgrade(1, "thickGloves", 10, false, 0.2, "A thicker set of gloves"),
     sturdyGloves = new upgrade(2, "sturdyGloves", 20, false, 0.5, "A sturdy pair of gloves"),
@@ -130,7 +64,7 @@ const upgradeInfo = (cycler, id) => {
 
 const whenTheUpgradeShows = (arr) => {
     for (j = 0; j < arr.length; j++) {
-        if (config.currency >= arr[j].cost && arr[j].purchased === false) {
+        if (game.currency >= arr[j].cost && arr[j].purchased === false) {
             document.getElementById(arr[j].id).style.display = "flex";
         }
     }
@@ -139,7 +73,7 @@ const whenTheUpgradeShows = (arr) => {
 
 const whenTheHouseShows = (arr) => {
     for (i = 0; i < arr.length; i++) {
-        if (config.currency > arr[i].houseCost) {
+        if (game.currency > arr[i].houseCost) {
             document.getElementById(arr[i].houseId).style.display = "flex";
         }
 
@@ -147,10 +81,10 @@ const whenTheHouseShows = (arr) => {
 }
 
 const refreshValues = () => {
-    let currencyTwoDP = config.currency.toFixed(2);
-    let repairCostTwoDP = config.repairCost.toFixed(2);
-    let workPowerTwoDP = config.workPower.toFixed(2);
-    let repairPowerTwoDP = config.repairPower.toFixed(2);
+    let currencyTwoDP = game.currency.toFixed(2);
+    let repairCostTwoDP = game.repairCost.toFixed(2);
+    let workPowerTwoDP = game.workPower.toFixed(2);
+    let repairPowerTwoDP = game.repairPower.toFixed(2);
     document.getElementById("currencyNumber").innerHTML = currencyTwoDP;
     document.getElementById("repairCostId").innerHTML = repairCostTwoDP;
     document.getElementById("repairPowerId").innerHTML = repairPowerTwoDP;
@@ -160,12 +94,12 @@ const refreshValues = () => {
 const incomeFromHouse = (arr) => {
     for (x = 0; x < arr.length; x++) {
         if (arr[x].purchased === true) {
-            config.currency += arr[x].stageOneValue;
+            game.currency += arr[x].stageOneValue;
             if (arr[x].currentHouseHp >= arr[x].stageOneHp) {
-                config.currency += arr[x].stageTwoValue;
+                game.currency += arr[x].stageTwoValue;
             }
             if (arr[x].currentHouseHp >= arr[x].stageTwoHp) {
-                config.currency += arr[x].stageThreeValue;
+                game.currency += arr[x].stageThreeValue;
 
             }
         }
@@ -176,83 +110,83 @@ const incomeFromHouse = (arr) => {
 //onclicks
 
 const clicker = () => {
-    config.currency += config.workPower;
-    document.getElementById("currencyNumber").innerHTML = config.currency.toFixed(2);
+    game.currency += game.workPower;
+    document.getElementById("currencyNumber").innerHTML = game.currency.toFixed(2);
 }
 
 const purchase = (houseId, buttonId) => {
-    if (config.currency >= houseArray[houseId].houseCost) {
-        config.currency -= houseArray[houseId].houseCost;
+    if (game.currency >= houseArray[houseId].houseCost) {
+        game.currency -= houseArray[houseId].houseCost;
         houseArray[houseId].purchased = true;
         document.getElementById(buttonId).style.background = "green";
-        document.getElementById("currencyNumber").innerHTML = config.currency.toFixed(2);
+        document.getElementById("currencyNumber").innerHTML = game.currency.toFixed(2);
     }
 }
 
 const repair = (houseToRepair, finishBar) => {
     let valueToUse;
 
-    if (config.currency >= config.repairCost) {
-        config.currency -= config.repairCost
+    if (game.currency >= game.repairCost) {
+        game.currency -= game.repairCost
         if (houseArray[houseToRepair]) {
-            houseArray[houseToRepair].currentHouseHp += config.repairPower;
+            houseArray[houseToRepair].currentHouseHp += game.repairPower;
             if (houseArray[houseToRepair].currentHouseHp < houseArray[houseToRepair].stageOneHp) {
                 console.log(houseArray[houseToRepair].currentHouseHp)
-                valueToUse = houseArray[houseToRepair].currentHouseHp / (houseArray[houseToRepair].stageOneHp / config.barWidth)
+                valueToUse = houseArray[houseToRepair].currentHouseHp / (houseArray[houseToRepair].stageOneHp / game.barWidth)
             }
 
             if (houseArray[houseToRepair].currentHouseHp >= houseArray[houseToRepair].stageOneHp && houseArray[houseToRepair].currentHouseHp < houseArray[houseToRepair].stageTwoHp) {
                 console.log(houseArray[houseToRepair].currentHouseHp)
-                valueToUse = houseArray[houseToRepair].currentHouseHp / (houseArray[houseToRepair].stageTwoHp / config.barWidth)
+                valueToUse = houseArray[houseToRepair].currentHouseHp / (houseArray[houseToRepair].stageTwoHp / game.barWidth)
             }
 
             if (houseArray[houseToRepair].currentHouseHp >= houseArray[houseToRepair].stageTwoHp && houseArray[houseToRepair].currentHouseHp < houseArray[houseToRepair].stageThreeHp) {
                 console.log(houseArray[houseToRepair].currentHouseHp)
-                valueToUse = houseArray[houseToRepair].currentHouseHp / (houseArray[houseToRepair].stageThreeHp / config.barWidth)
+                valueToUse = houseArray[houseToRepair].currentHouseHp / (houseArray[houseToRepair].stageThreeHp / game.barWidth)
             }
         }
 
         document.getElementById(finishBar).style.width = valueToUse ?
             `${valueToUse}px` :
             document.getElementById(finishBar).style.width;
-        document.getElementById("currencyNumber").innerHTML = config.currency.toFixed(2);
+        document.getElementById("currencyNumber").innerHTML = game.currency.toFixed(2);
     }
 }
 
 //upgrades
 
 const upgraderWP = (cycler) => {
-    if (config.currency >= upgradeArray[cycler].cost) {
-        config.currency -= upgradeArray[cycler].cost;
-        document.getElementById("currencyNumber").innerHTML = config.currency.toFixed(2);
+    if (game.currency >= upgradeArray[cycler].cost) {
+        game.currency -= upgradeArray[cycler].cost;
+        document.getElementById("currencyNumber").innerHTML = game.currency.toFixed(2);
         upgradeArray[cycler].purchased = true;
-        config.workPower += upgradeArray[cycler].effect;
-        document.getElementById("workPowerId").innerHTML = config.workPower.toFixed(2);
+        game.workPower += upgradeArray[cycler].effect;
+        document.getElementById("workPowerId").innerHTML = game.workPower.toFixed(2);
         document.getElementById(upgradeArray[cycler].id).style.display = "none";
 
     }
 }
 
 const upgraderRP = (cycler) => {
-    if (config.currency >= upgradeArray[cycler].cost) {
-        config.currency -= upgradeArray[cycler].cost;
-        document.getElementById("currencyNumber").innerHTML = config.currency.toFixed(2);
+    if (game.currency >= upgradeArray[cycler].cost) {
+        game.currency -= upgradeArray[cycler].cost;
+        document.getElementById("currencyNumber").innerHTML = game.currency.toFixed(2);
         upgradeArray[cycler].purchased = true;
-        config.repairPower += upgradeArray[cycler].effect;
+        game.repairPower += upgradeArray[cycler].effect;
         const elemvar = "repairPowerId"
-        document.getElementById(elemvar).innerHTML = config.workPower.toFixed(2);
+        document.getElementById(elemvar).innerHTML = game.workPower.toFixed(2);
         document.getElementById(upgradeArray[cycler].id).style.display = "none";
 
     }
 }
 
 const upgraderRC = (cycler) => {
-    if (config.currency >= upgradeArray[cycler].cost) {
-        config.currency -= upgradeArray[cycler].cost;
-        document.getElementById("currencyNumber").innerHTML = config.currency.toFixed(2);
+    if (game.currency >= upgradeArray[cycler].cost) {
+        game.currency -= upgradeArray[cycler].cost;
+        document.getElementById("currencyNumber").innerHTML = game.currency.toFixed(2);
         upgradeArray[cycler].purchased = true;
-        config.repairCost += upgradeArray[cycler].effect;
-        document.getElementById("repairCostId").innerHTML = config.workPower.toFixed(2);
+        game.repairCost += upgradeArray[cycler].effect;
+        document.getElementById("repairCostId").innerHTML = game.workPower.toFixed(2);
         document.getElementById(upgradeArray[cycler].id).style.display = "none";
 
     }
