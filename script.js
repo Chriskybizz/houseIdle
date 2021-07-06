@@ -4,11 +4,24 @@ const config = {
     currency: 0,
     repairCost: 5,
     workPower: 0.3,
-
 }
 
-
-
+class Game {
+    constructor(
+        barWidth,
+        repairPower,
+        currency,
+        repairCost,
+        workPower,
+    ) {
+        this.barWidth = barWidth ? barWidth : 49.5;
+        this.repairPower = repairPower ? repairPower : 0.3;
+        this.currency = currency ? currency : 0;
+        this.repairCost = repairCost ? repairCost : 5;
+        this.workPower = workPower ? workPower : 0.3;
+        this.houses = []; // map returned house(class) objects
+    }
+}
 class house {
     constructor(
         houseId,
@@ -36,7 +49,6 @@ class house {
         this.houseBio = houseBio;
     }
 }
-
 class upgrade {
     constructor(cycler, id, cost, purchased, effect, bio) {
         this.cycler = cycler;
@@ -49,8 +61,33 @@ class upgrade {
 }
 
 const houseArray = [
-    house1 = new house("houseOne", 100, false, 20, 50, 100, 0, 0.3, 0.7, 1.5, "A small cardboard box to protect against the elements"),
-    house2 = new house("houseTwo", 1000, false, 500, 800, 1200, 0, 1.2, 2.5, 5, "A shack, four wooden walls and and a roof. Perfect for hipsters")];
+    house1 = new house(
+        "houseOne",
+        100,
+        false,
+        20,
+        50,
+        100,
+        0,
+        0.3,
+        0.7,
+        1.5,
+        "A small cardboard box to protect against the elements"
+    ),
+    house2 = new house(
+        "houseTwo",
+        1000,
+        false,
+        500,
+        800,
+        1200,
+        0,
+        1.2,
+        2.5,
+        5,
+        "A shack, four wooden walls and and a roof. Perfect for hipsters"
+    ),
+];
 
 
 const upgradeArray = [
@@ -67,7 +104,7 @@ const upgradeArray = [
     aTrowel = new upgrade(9, "aTrowel", 150, false, 0.1, "A trowel for cement"),
     aHammer = new upgrade(10, "aHammer", 300, false, 0.2, "A hammer to save time"),
     aDrill = new upgrade(11, "aDrill", 500, false, 0.5, "A drill"),
-    spiritLevel= new upgrade(12, "spiritLevel", 50, false, 1, "Keep it level"),
+    spiritLevel = new upgrade(12, "spiritLevel", 50, false, 1, "Keep it level"),
     elbowGrease = new upgrade(13, "elbowGrease", 90, false, 2, "EG40"),
     aPick = new upgrade(14, "aPick", 150, false, 4, "For breaking rocks"),
     jackHammer = new upgrade(15, "jackHammer", 300, false, 9, "Smashing rocks"),
@@ -77,7 +114,8 @@ const upgradeArray = [
 ]
 
 const upgradeInfo = (cycler, id) => {
-    const infoText = `cost: ${upgradeArray[cycler].cost}, \n Description: ${upgradeArray[cycler].bio}, \n Job Income +: ${upgradeArray[cycler].effect}`
+    const infoText = `cost: ${upgradeArray[cycler].cost}, \n Description: ${upgradeArray[cycler].bio},\
+    \n Job Income +: ${upgradeArray[cycler].effect}`
     document.getElementById(id).innerHTML = infoText;
     console.log(infoText)
 }
@@ -103,7 +141,6 @@ const whenTheHouseShows = (arr) => {
     for (i = 0; i < arr.length; i++) {
         if (config.currency > arr[i].houseCost) {
             document.getElementById(arr[i].houseId).style.display = "flex";
-
         }
 
     }
@@ -153,28 +190,31 @@ const purchase = (houseId, buttonId) => {
 }
 
 const repair = (houseToRepair, finishBar) => {
+    let valueToUse;
+
     if (config.currency >= config.repairCost) {
         config.currency -= config.repairCost
-        if (houseArray[houseToRepair].currentHouseHp < houseArray[houseToRepair].stageOneHp) {
+        if (houseArray[houseToRepair]) {
             houseArray[houseToRepair].currentHouseHp += config.repairPower;
-            console.log(houseArray[houseToRepair].currentHouseHp)
-            const valueToUse = houseArray[houseToRepair].currentHouseHp / (houseArray[houseToRepair].stageOneHp / config.barWidth)
-            document.getElementById(finishBar).style.width = valueToUse + "px"
-        }
-        if (houseArray[houseToRepair].currentHouseHp >= houseArray[houseToRepair].stageOneHp && houseArray[houseToRepair].currentHouseHp < houseArray[houseToRepair].stageTwoHp) {
-            houseArray[houseToRepair].currentHouseHp += config.repairPower;
-            console.log(houseArray[houseToRepair].currentHouseHp)
-            const valueToUse = houseArray[houseToRepair].currentHouseHp / (houseArray[houseToRepair].stageTwoHp / config.barWidth)
-            document.getElementById(finishBar).style.width = valueToUse + "px"
+            if (houseArray[houseToRepair].currentHouseHp < houseArray[houseToRepair].stageOneHp) {
+                console.log(houseArray[houseToRepair].currentHouseHp)
+                valueToUse = houseArray[houseToRepair].currentHouseHp / (houseArray[houseToRepair].stageOneHp / config.barWidth)
+            }
+
+            if (houseArray[houseToRepair].currentHouseHp >= houseArray[houseToRepair].stageOneHp && houseArray[houseToRepair].currentHouseHp < houseArray[houseToRepair].stageTwoHp) {
+                console.log(houseArray[houseToRepair].currentHouseHp)
+                valueToUse = houseArray[houseToRepair].currentHouseHp / (houseArray[houseToRepair].stageTwoHp / config.barWidth)
+            }
+
+            if (houseArray[houseToRepair].currentHouseHp >= houseArray[houseToRepair].stageTwoHp && houseArray[houseToRepair].currentHouseHp < houseArray[houseToRepair].stageThreeHp) {
+                console.log(houseArray[houseToRepair].currentHouseHp)
+                valueToUse = houseArray[houseToRepair].currentHouseHp / (houseArray[houseToRepair].stageThreeHp / config.barWidth)
+            }
         }
 
-        if (houseArray[houseToRepair].currentHouseHp >= houseArray[houseToRepair].stageTwoHp && houseArray[houseToRepair].currentHouseHp < houseArray[houseToRepair].stageThreeHp) {
-            houseArray[houseToRepair].currentHouseHp += config.repairPower;
-            console.log(houseArray[houseToRepair].currentHouseHp)
-            const valueToUse = houseArray[houseToRepair].currentHouseHp / (houseArray[houseToRepair].stageThreeHp / config.barWidth)
-            document.getElementById(finishBar).style.width = valueToUse + "px"
-        }
-
+        document.getElementById(finishBar).style.width = valueToUse ?
+            `${valueToUse}px` :
+            document.getElementById(finishBar).style.width;
         document.getElementById("currencyNumber").innerHTML = config.currency.toFixed(2);
     }
 }
@@ -199,7 +239,8 @@ const upgraderRP = (cycler) => {
         document.getElementById("currencyNumber").innerHTML = config.currency.toFixed(2);
         upgradeArray[cycler].purchased = true;
         config.repairPower += upgradeArray[cycler].effect;
-        document.getElementById("repairPowerId").innerHTML = config.workPower.toFixed(2);
+        const elemvar = "repairPowerId"
+        document.getElementById(elemvar).innerHTML = config.workPower.toFixed(2);
         document.getElementById(upgradeArray[cycler].id).style.display = "none";
 
     }
@@ -217,10 +258,7 @@ const upgraderRC = (cycler) => {
     }
 }
 
-
-
-
-window.setInterval(function () {
+window.setInterval(function() {
     refreshValues();
     incomeFromHouse(houseArray);
     whenTheHouseShows(houseArray);
